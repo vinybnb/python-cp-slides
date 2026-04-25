@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 7 — Đệ quy (Recursion)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <div class="lesson-number">Buổi 07</div>
+  <h1>Đệ quy (Recursion)</h1>
+  <p class="subtitle">Hàm tự gọi chính mình 🌀</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🌀 Đệ quy là gì?</h2>
+  <div class="concept">
+    <div class="emoji">🪞</div>
+    <div class="concept-title">Hàm gọi lại chính nó với bài toán nhỏ hơn</div>
+    <div class="concept-desc">Giống như gương soi gương — nhưng phải có điểm dừng!</div>
+  </div>
+  <pre class="fragment"><code class="language-python">def giai_thua(n):
+    if n <= 1:        # Base case — điểm dừng!
+        return 1
+    return n * giai_thua(n - 1)  # Gọi lại chính mình
+
+print(giai_thua(5))  # 5*4*3*2*1 = 120</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>📐 2 thành phần bắt buộc</h2>
+  <div class="key-point"><span class="icon">1️⃣</span><span><span class="highlight">Base case</span> — Điều kiện dừng (không gọi đệ quy nữa)</span></div>
+  <div class="key-point"><span class="icon">2️⃣</span><span><span class="highlight">Recursive case</span> — Gọi lại với bài toán nhỏ hơn</span></div>
+  <div class="info-box danger fragment">⚠️ Quên base case → <strong>Stack Overflow</strong> (chạy mãi không dừng!)</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🐇 Fibonacci</h2>
+  <p>F(0)=0, F(1)=1, F(n) = F(n-1) + F(n-2)</p>
+  <pre><code class="language-python"># Cách 1: Đệ quy thuần (chậm!)
+def fib(n):
+    if n <= 1: return n
+    return fib(n-1) + fib(n-2)
+
+# Cách 2: Đệ quy có nhớ (nhanh!)
+memo = {}
+def fib_memo(n):
+    if n <= 1: return n
+    if n in memo: return memo[n]
+    memo[n] = fib_memo(n-1) + fib_memo(n-2)
+    return memo[n]</code></pre>
+  <div class="info-box warning fragment">💡 Đệ quy thuần: O(2ⁿ) — rất chậm! Có nhớ: O(n) — siêu nhanh!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🏆 Bài CP: Tính lũy thừa nhanh</h2>
+  <pre><code class="language-python">def power(a, n):
+    if n == 0: return 1
+    if n % 2 == 0:
+        half = power(a, n // 2)
+        return half * half
+    return a * power(a, n - 1)
+
+# power(2, 10) = 1024
+# Chỉ cần ~log₂(n) phép nhân thay vì n phép!</code></pre>
+  <div class="info-box success fragment">✅ Từ O(n) → O(log n) — kỹ thuật quan trọng trong CP!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🏗️ Tháp Hà Nội</h2>
+  <pre><code class="language-python">def hanoi(n, src, dst, aux):
+    if n == 1:
+        print(f"Di chuyển đĩa 1: {src} → {dst}")
+        return
+    hanoi(n-1, src, aux, dst)
+    print(f"Di chuyển đĩa {n}: {src} → {dst}")
+    hanoi(n-1, aux, dst, src)
+
+hanoi(3, 'A', 'C', 'B')</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Tổng đệ quy <span class="difficulty">⭐</span></div><div class="exercise-desc">Viết hàm sum_rec(n) = 1+2+...+n bằng đệ quy</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Fibonacci thứ N <span class="difficulty">⭐⭐</span></div><div class="exercise-desc">Tính F(n) với memo, n ≤ 10⁶</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: Lũy thừa nhanh <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Tính a^n mod m (n ≤ 10¹⁸)</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 4: GCD đệ quy <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Viết GCD bằng đệ quy: gcd(a,b) = gcd(b, a%b)</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: Đệ quy! → Buổi 8: Sắp xếp 📊</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

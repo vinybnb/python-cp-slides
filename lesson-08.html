@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 8 — Sắp xếp (Sorting)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#0a1a0a,#0a1628)">
+  <div class="lesson-number">Buổi 08</div>
+  <h1>Sắp xếp (Sorting)</h1>
+  <p class="subtitle">Thuật toán nền tảng của mọi cuộc thi 📊</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🫧 Bubble Sort</h2>
+  <p>So sánh 2 phần tử liền kề, đổi chỗ nếu sai thứ tự</p>
+  <pre><code class="language-python">def bubble_sort(a):
+    n = len(a)
+    for i in range(n):
+        for j in range(n - 1 - i):
+            if a[j] > a[j+1]:
+                a[j], a[j+1] = a[j+1], a[j]
+    return a</code></pre>
+  <div class="info-box warning fragment">⏱️ Độ phức tạp: O(n²) — chậm với dữ liệu lớn!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🎯 Selection Sort</h2>
+  <p>Tìm min, đặt vào đầu, lặp lại</p>
+  <pre><code class="language-python">def selection_sort(a):
+    n = len(a)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1, n):
+            if a[j] < a[min_idx]:
+                min_idx = j
+        a[i], a[min_idx] = a[min_idx], a[i]
+    return a</code></pre>
+  <div class="info-box fragment">📌 Cũng O(n²) — nhưng ít swap hơn Bubble Sort</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>⚡ Python built-in sort</h2>
+  <p>Trong CP, dùng <code>sort()</code> có sẵn — <span class="highlight">O(n log n)</span></p>
+  <pre><code class="language-python">a = [5, 2, 8, 1, 9]
+a.sort()              # Sắp xếp tăng dần tại chỗ
+a.sort(reverse=True)  # Giảm dần
+
+b = sorted(a)         # Tạo list mới đã sort
+
+# Sort theo tiêu chí tùy chỉnh
+pairs = [(3, 'c'), (1, 'a'), (2, 'b')]
+pairs.sort(key=lambda x: x[0])  # Sort theo phần tử đầu</code></pre>
+  <div class="info-box success fragment">✅ Trong CP luôn dùng <code>.sort()</code> — nhanh & đáng tin cậy!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🏆 Bài CP: Sort tùy chỉnh</h2>
+  <pre><code class="language-python"># Sắp xếp học sinh theo điểm giảm dần,
+# nếu bằng điểm thì theo tên tăng dần
+students = []
+n = int(input())
+for _ in range(n):
+    name, score = input().split()
+    students.append((name, int(score)))
+
+students.sort(key=lambda x: (-x[1], x[0]))
+for name, score in students:
+    print(name, score)</code></pre>
+  <div class="info-box fragment">💡 Dấu <code>-</code> trước số = đảo thứ tự sort cho trường đó</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>📊 So sánh thuật toán</h2>
+  <table>
+    <thead><tr><th>Thuật toán</th><th>Thời gian</th><th>Khi nào dùng</th></tr></thead>
+    <tbody>
+      <tr><td>Bubble Sort</td><td>O(n²)</td><td>Học để hiểu, không dùng trong CP</td></tr>
+      <tr><td>Selection Sort</td><td>O(n²)</td><td>Học để hiểu</td></tr>
+      <tr><td><code>.sort()</code></td><td>O(n log n)</td><td><span class="highlight">Luôn dùng trong CP!</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Sort cơ bản <span class="difficulty">⭐</span></div><div class="exercise-desc">Nhập mảng, in ra mảng tăng dần và giảm dần</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Phần tử lớn thứ K <span class="difficulty">⭐⭐</span></div><div class="exercise-desc">Nhập mảng và K, in phần tử lớn thứ K</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: Sort học sinh <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">N học sinh (tên, điểm). Sort theo điểm giảm, tên tăng</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 4: Khoảng cách nhỏ nhất <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Cho mảng N số, tìm |a[i]-a[j]| nhỏ nhất (sort trước!)</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#0a1a0a,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: Sorting! → Buổi 9: Tìm kiếm nhị phân 🔍</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

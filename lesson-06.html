@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 6 — Hàm (Function)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <div class="lesson-number">Buổi 06</div>
+  <h1>Hàm (Function)</h1>
+  <p class="subtitle">Chia nhỏ bài toán — Tái sử dụng code 🧩</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🤔 Tại sao cần Hàm?</h2>
+  <pre><code class="language-python"># Không dùng hàm: kiểm tra nguyên tố 3 lần!
+n = int(input())
+ok = True
+for i in range(2, int(n**0.5)+1):
+    if n % i == 0: ok = False; break
+# Lặp lại y hệt cho m, k... 😫</code></pre>
+  <div class="info-box success fragment">✅ Hàm giúp viết 1 lần, dùng nhiều lần!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>📦 Tạo hàm cơ bản</h2>
+  <pre><code class="language-python">def chao(ten):
+    print(f"Xin chào {ten}! 👋")
+
+# Gọi hàm
+chao("Minh")    # Xin chào Minh! 👋
+chao("Lan")     # Xin chào Lan! 👋</code></pre>
+  <div class="key-point fragment"><span class="icon">📌</span><span><code>def</code> = define (định nghĩa hàm)</span></div>
+  <div class="key-point fragment"><span class="icon">📌</span><span><code>ten</code> = tham số (parameter)</span></div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>↩️ Hàm có <code>return</code></h2>
+  <pre><code class="language-python">def tong(a, b):
+    return a + b
+
+def is_prime(n):
+    if n < 2: return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0: return False
+    return True
+
+# Sử dụng
+print(tong(3, 5))       # 8
+print(is_prime(17))      # True
+print(is_prime(4))       # False</code></pre>
+  <div class="info-box fragment">📌 <code>return</code> trả về kết quả — hàm dừng ngay tại đó</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🏆 Bài CP: Đếm nguyên tố trong đoạn</h2>
+  <pre><code class="language-python">def is_prime(n):
+    if n < 2: return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0: return False
+    return True
+
+a, b = map(int, input().split())
+dem = 0
+for x in range(a, b+1):
+    if is_prime(x):    # Gọi hàm!
+        dem += 1
+print(dem)</code></pre>
+  <div class="info-box success fragment">✅ Code sạch, dễ đọc, dễ debug nhờ tách hàm!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🔢 Hàm hữu ích cho CP</h2>
+  <pre><code class="language-python">def gcd(a, b):          # Ước chung lớn nhất
+    while b: a, b = b, a % b
+    return a
+
+def lcm(a, b):          # Bội chung nhỏ nhất
+    return a * b // gcd(a, b)
+
+def count_digits(n):    # Đếm chữ số
+    dem = 0
+    while n > 0:
+        dem += 1
+        n //= 10
+    return dem</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Hàm tổng chữ số <span class="difficulty">⭐</span></div><div class="exercise-desc">Viết hàm digit_sum(n) trả về tổng chữ số</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Hàm ước số <span class="difficulty">⭐⭐</span></div><div class="exercise-desc">Viết hàm count_divisors(n) đếm số ước</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: GCD & LCM <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Nhập a, b — in GCD và LCM</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 4: Số hoàn hảo <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Viết hàm is_perfect(n): tổng ước (trừ n) = n. Đếm số hoàn hảo ≤ N</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: Hàm! → Buổi 7: Đệ quy 🌀</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

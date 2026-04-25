@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 14 — Stack (Ngăn xếp)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <div class="lesson-number">Buổi 14</div>
+  <h1>Stack (Ngăn xếp)</h1>
+  <p class="subtitle">LIFO — Last In, First Out 📚</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>📚 Stack là gì?</h2>
+  <div class="concept">
+    <div class="emoji">🥞</div>
+    <div class="concept-title">Chồng đĩa: Đặt lên trên cùng, lấy từ trên xuống</div>
+    <div class="concept-desc">LIFO = Last In, First Out</div>
+  </div>
+  <pre class="fragment"><code class="language-python"># Stack trong Python = List!
+stack = []
+stack.append(1)    # push: [1]
+stack.append(2)    # push: [1, 2]
+stack.append(3)    # push: [1, 2, 3]
+top = stack[-1]    # peek: 3
+stack.pop()        # pop:  [1, 2]
+print(len(stack))  # size: 2
+print(not stack)   # empty? False</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🏆 Bài kinh điển: Dấu ngoặc hợp lệ</h2>
+  <pre><code class="language-python">def is_valid(s):
+    stack = []
+    pairs = {')': '(', ']': '[', '}': '{'}
+    for ch in s:
+        if ch in '([{':
+            stack.append(ch)
+        elif ch in ')]}':
+            if not stack or stack[-1] != pairs[ch]:
+                return False
+            stack.pop()
+    return len(stack) == 0
+
+print(is_valid("({[]})"))   # True
+print(is_valid("([)]"))     # False</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>📊 Monotonic Stack</h2>
+  <div class="info-box">📋 Cho mảng, tìm phần tử lớn hơn gần nhất bên phải mỗi phần tử</div>
+  <pre><code class="language-python">def next_greater(a):
+    n = len(a)
+    result = [-1] * n
+    stack = []  # Lưu index
+    for i in range(n):
+        while stack and a[stack[-1]] < a[i]:
+            result[stack.pop()] = a[i]
+        stack.append(i)
+    return result
+
+a = [4, 5, 2, 10, 8]
+print(next_greater(a))  # [5, 10, 10, -1, -1]</code></pre>
+  <div class="info-box success fragment">✅ O(n) thay vì O(n²) — mỗi phần tử push/pop đúng 1 lần!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Dấu ngoặc <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Kiểm tra chuỗi ngoặc hợp lệ: (), [], {}</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Đảo chuỗi bằng Stack <span class="difficulty">⭐</span></div><div class="exercise-desc">Dùng stack đảo ngược chuỗi</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: Next Greater Element <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Tìm phần tử lớn hơn gần nhất bên phải</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 4: Tính biểu thức postfix <span class="difficulty">⭐⭐⭐</span></div><div class="exercise-desc">Tính "3 4 + 2 *" = (3+4)*2 = 14</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: Stack! → Buổi 15: Queue & Deque 🚶‍♂️</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

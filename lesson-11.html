@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 11 — Độ phức tạp thuật toán (Big O)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <div class="lesson-number">Buổi 11</div>
+  <h1>Độ phức tạp thuật toán</h1>
+  <p class="subtitle">Big O — Đo tốc độ code ⏱️</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>⏱️ Tại sao cần Big O?</h2>
+  <div class="concept">
+    <div class="emoji">💡</div>
+    <div class="concept-title">Trong CP, code đúng chưa đủ — phải đủ NHANH!</div>
+    <div class="concept-desc">Time Limit thường 1-2 giây. Python xử lý ~10⁷ phép tính/giây</div>
+  </div>
+  <div class="info-box fragment">📌 Big O cho biết code chạy <span class="highlight">chậm đi bao nhiêu</span> khi dữ liệu tăng</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>📊 Các độ phức tạp phổ biến</h2>
+  <table>
+    <thead><tr><th>Big O</th><th>Tên</th><th>N=10⁶</th><th>OK?</th></tr></thead>
+    <tbody>
+      <tr><td><code>O(1)</code></td><td>Hằng số</td><td>1</td><td>✅</td></tr>
+      <tr><td><code>O(log n)</code></td><td>Logarit</td><td>20</td><td>✅</td></tr>
+      <tr><td><code>O(n)</code></td><td>Tuyến tính</td><td>10⁶</td><td>✅</td></tr>
+      <tr><td><code>O(n log n)</code></td><td>Sort</td><td>2×10⁷</td><td>✅</td></tr>
+      <tr><td><code>O(n²)</code></td><td>Bình phương</td><td>10¹²</td><td>❌ TLE!</td></tr>
+      <tr><td><code>O(2ⁿ)</code></td><td>Mũ</td><td>∞</td><td>❌❌</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🔍 Cách xác định Big O</h2>
+  <pre><code class="language-python"># O(1) — không phụ thuộc n
+x = a + b
+
+# O(n) — 1 vòng lặp
+for i in range(n): ...
+
+# O(n²) — 2 vòng lặp lồng nhau
+for i in range(n):
+    for j in range(n): ...
+
+# O(n log n) — sort
+a.sort()
+
+# O(log n) — chia đôi
+while n > 0: n //= 2</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🧮 Quy tắc ước lượng nhanh</h2>
+  <div class="info-box success">
+    <strong>Python ≈ 10⁷ phép/giây</strong> (C++ ≈ 10⁸-10⁹)
+  </div>
+  <table>
+    <thead><tr><th>N ≤</th><th>Thuật toán tối đa</th></tr></thead>
+    <tbody>
+      <tr><td>10</td><td>O(n!) — brute force hoán vị</td></tr>
+      <tr><td>20</td><td>O(2ⁿ) — bitmask</td></tr>
+      <tr><td>500</td><td>O(n³)</td></tr>
+      <tr><td>5.000</td><td>O(n²)</td></tr>
+      <tr><td>10⁶</td><td>O(n log n)</td></tr>
+      <tr><td>10⁷</td><td>O(n)</td></tr>
+    </tbody>
+  </table>
+  <div class="info-box fragment">💡 Đọc N trong đề → biết ngay cần thuật toán nào!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Xác định Big O <span class="difficulty">⭐</span></div><div class="exercise-desc">Cho 5 đoạn code, xác định độ phức tạp mỗi đoạn</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Tối ưu tìm cặp <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Tìm cặp (i,j) có a[i]+a[j]=S. Giảm từ O(n²) → O(n log n)</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: Ước lượng <span class="difficulty">⭐⭐</span></div><div class="exercise-desc">Cho N=10⁶, thuật toán O(n√n) có chạy kịp 2s không?</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: Big O! → Buổi 12: Two Pointers 👆👆</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 22 — DFS (Tìm kiếm theo chiều sâu)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#0a1a0a,#0a1628)">
+  <div class="lesson-number">Buổi 22</div>
+  <h1>DFS</h1>
+  <p class="subtitle">Tìm kiếm theo chiều sâu — Depth-First Search 🔍</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🔍 DFS — Đi sâu trước</h2>
+  <pre><code class="language-python">import sys
+sys.setrecursionlimit(200000)
+
+def dfs(u, adj, visited):
+    visited[u] = True
+    print(u, end=' ')
+    for v in adj[u]:
+        if not visited[v]:
+            dfs(v, adj, visited)
+
+# Hoặc dùng stack (không đệ quy)
+def dfs_stack(start, adj, n):
+    visited = [False] * (n + 1)
+    stack = [start]
+    while stack:
+        u = stack.pop()
+        if visited[u]: continue
+        visited[u] = True
+        for v in adj[u]:
+            if not visited[v]:
+                stack.append(v)</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🏝️ Đếm thành phần liên thông</h2>
+  <pre><code class="language-python">def count_components(n, adj):
+    visited = [False] * (n + 1)
+    count = 0
+    for u in range(1, n + 1):
+        if not visited[u]:
+            dfs(u, adj, visited)
+            count += 1
+    return count
+
+# Ứng dụng: Đếm số đảo trong lưới
+# Mỗi ô '1' = đất, '0' = nước
+# DFS/BFS từ mỗi ô '1' chưa thăm → 1 đảo mới</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🔄 Phát hiện chu trình</h2>
+  <pre><code class="language-python"># Đồ thị vô hướng: có chu trình khi gặp đỉnh đã thăm
+def has_cycle(n, adj):
+    visited = [False] * (n + 1)
+    def dfs(u, parent):
+        visited[u] = True
+        for v in adj[u]:
+            if not visited[v]:
+                if dfs(v, u): return True
+            elif v != parent:
+                return True  # Chu trình!
+        return False
+    for u in range(1, n+1):
+        if not visited[u]:
+            if dfs(u, -1): return True
+    return False</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>📊 BFS vs DFS</h2>
+  <table>
+    <thead><tr><th></th><th>BFS</th><th>DFS</th></tr></thead>
+    <tbody>
+      <tr><td>CTDL</td><td>Queue</td><td>Stack / Đệ quy</td></tr>
+      <tr><td>Thứ tự</td><td>Theo lớp (gần → xa)</td><td>Đi sâu nhất có thể</td></tr>
+      <tr><td>Đường ngắn nhất</td><td><span class="highlight-success">✅ Có</span></td><td>❌ Không</td></tr>
+      <tr><td>Bộ nhớ</td><td>O(V) — nhiều hơn</td><td>O(h) — ít hơn</td></tr>
+      <tr><td>Dùng khi</td><td>Shortest path</td><td>Duyệt toàn bộ, chu trình</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Duyệt DFS <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">In thứ tự DFS từ đỉnh 1</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Đếm thành phần liên thông <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Đếm số nhóm đỉnh liên thông</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: Đếm đảo <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Lưới NxM, đếm số đảo (nhóm ô '1' liền kề)</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 4: Phát hiện chu trình <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Kiểm tra đồ thị có chu trình không</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#0a1a0a,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: DFS! → Buổi 23: Dijkstra 🛣️</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

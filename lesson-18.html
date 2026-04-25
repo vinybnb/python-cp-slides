@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 18 — Quy hoạch động cơ bản (DP Intro)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <div class="lesson-number">Buổi 18</div>
+  <h1>Quy hoạch động</h1>
+  <p class="subtitle">Dynamic Programming — DP Intro 🧠</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🧠 DP là gì?</h2>
+  <div class="concept">
+    <div class="emoji">💡</div>
+    <div class="concept-title">Chia bài toán thành bài toán con + Lưu kết quả để không tính lại</div>
+    <div class="concept-desc">= Đệ quy + Memoization = "Nhớ để không làm lại"</div>
+  </div>
+  <div class="key-point fragment"><span class="icon">1️⃣</span><span><span class="highlight">Bài toán con chồng chéo</span> — cùng bài toán con xuất hiện nhiều lần</span></div>
+  <div class="key-point fragment"><span class="icon">2️⃣</span><span><span class="highlight">Cấu trúc tối ưu con</span> — lời giải tối ưu chứa lời giải tối ưu của bài toán con</span></div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🐇 Fibonacci: Đệ quy → DP</h2>
+  <div class="two-col">
+    <div>
+      <h3>❌ Đệ quy: O(2ⁿ)</h3>
+      <pre><code class="language-python">def fib(n):
+    if n <= 1: return n
+    return fib(n-1) + fib(n-2)
+# fib(40) → chạy mãi!</code></pre>
+    </div>
+    <div>
+      <h3>✅ DP: O(n)</h3>
+      <pre><code class="language-python">def fib(n):
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+# fib(1000000) → instant!</code></pre>
+    </div>
+  </div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🪜 Bài kinh điển: Leo cầu thang</h2>
+  <div class="info-box">Có N bậc thang. Mỗi bước leo 1 hoặc 2 bậc. Có bao nhiêu cách?</div>
+  <pre><code class="language-python"># dp[i] = số cách leo đến bậc i
+# dp[i] = dp[i-1] + dp[i-2]  (leo 1 bậc + leo 2 bậc)
+
+def climb(n):
+    if n <= 2: return n
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    dp[2] = 2
+    for i in range(3, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+
+print(climb(5))  # 8 cách</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>💰 Đổi tiền xu (DP)</h2>
+  <div class="info-box">Cho mệnh giá coins[]. Đổi amount đồng với ít xu nhất.</div>
+  <pre><code class="language-python">def coin_change(coins, amount):
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0
+    for i in range(1, amount + 1):
+        for c in coins:
+            if c <= i and dp[i - c] + 1 < dp[i]:
+                dp[i] = dp[i - c] + 1
+    return dp[amount] if dp[amount] != float('inf') else -1
+
+print(coin_change([1, 3, 4], 6))  # 2 (3+3)</code></pre>
+  <div class="info-box warning fragment">⚠️ Greedy cho [1,3,4] với 6 → 4+1+1=3 xu. DP cho 3+3=2 xu. DP đúng hơn!</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>📝 Template DP</h2>
+  <div class="key-point"><span class="icon">1️⃣</span><span><span class="highlight">Định nghĩa trạng thái:</span> dp[i] = gì?</span></div>
+  <div class="key-point"><span class="icon">2️⃣</span><span><span class="highlight">Công thức chuyển:</span> dp[i] tính từ dp[j] nào?</span></div>
+  <div class="key-point"><span class="icon">3️⃣</span><span><span class="highlight">Base case:</span> dp[0] = ?, dp[1] = ?</span></div>
+  <div class="key-point"><span class="icon">4️⃣</span><span><span class="highlight">Kết quả:</span> dp[n] hay max(dp)?</span></div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Leo cầu thang <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">N bậc, mỗi bước 1-2-3 bậc. Đếm cách.</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Coin Change <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Ít xu nhất để đổi amount đồng</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: Max sum không liền kề <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Chọn phần tử không liền kề, tổng lớn nhất</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: DP! → Buổi 19: Knapsack 🎒</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

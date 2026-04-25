@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 24 — Số học trong CP (Number Theory)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <div class="lesson-number">Buổi 24</div>
+  <h1>Số học trong CP</h1>
+  <p class="subtitle">Number Theory — Sàng nguyên tố, Modular Arithmetic 🔢</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🔢 Sàng Eratosthenes</h2>
+  <div class="info-box">Tìm tất cả số nguyên tố ≤ N — O(N log log N)</div>
+  <pre><code class="language-python">def sieve(n):
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False
+    for i in range(2, int(n**0.5) + 1):
+        if is_prime[i]:
+            for j in range(i*i, n + 1, i):
+                is_prime[j] = False
+    return [i for i in range(2, n + 1) if is_prime[i]]
+
+primes = sieve(100)
+print(primes)  # [2, 3, 5, 7, 11, 13, ...]</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🔐 Phép chia dư (Modular Arithmetic)</h2>
+  <pre><code class="language-python">MOD = 10**9 + 7
+
+# Tính toán với mod — tránh tràn số
+(a + b) % MOD
+(a * b) % MOD
+# KHÔNG: (a / b) % MOD → dùng nghịch đảo modular!
+
+# Lũy thừa nhanh modular
+def power_mod(a, n, mod):
+    result = 1
+    a %= mod
+    while n > 0:
+        if n % 2 == 1:
+            result = result * a % mod
+        a = a * a % mod
+        n //= 2
+    return result
+
+# Nghịch đảo modular: a^(-1) mod p = a^(p-2) mod p
+def mod_inverse(a, mod):
+    return power_mod(a, mod - 2, mod)</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🔢 Phân tích thừa số nguyên tố</h2>
+  <pre><code class="language-python">def factorize(n):
+    factors = {}
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            factors[d] = factors.get(d, 0) + 1
+            n //= d
+        d += 1
+    if n > 1:
+        factors[n] = factors.get(n, 0) + 1
+    return factors
+
+print(factorize(360))  # {2: 3, 3: 2, 5: 1}</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🧮 Tổ hợp C(n, k) mod p</h2>
+  <pre><code class="language-python">MOD = 10**9 + 7
+
+# Tiền xử lý giai thừa
+MAX = 200001
+fact = [1] * MAX
+for i in range(1, MAX):
+    fact[i] = fact[i-1] * i % MOD
+
+def C(n, k):
+    if k < 0 or k > n: return 0
+    return fact[n] * mod_inverse(fact[k], MOD) % MOD \
+                    * mod_inverse(fact[n-k], MOD) % MOD
+
+print(C(10, 3))  # 120</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Sàng nguyên tố <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Đếm nguyên tố ≤ N (N ≤ 10⁷)</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Lũy thừa mod <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Tính a^n mod (10⁹+7), n ≤ 10¹⁸</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: C(n,k) mod p <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Tính tổ hợp C(n,k) mod 10⁹+7</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 4: Số ước <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Tính số ước của N bằng phân tích thừa số</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: Number Theory! → Buổi 25: Final Contest 🏆</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

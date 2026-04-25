@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Buổi 23 — Đường đi ngắn nhất (Dijkstra)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <div class="lesson-number">Buổi 23</div>
+  <h1>Đường đi ngắn nhất</h1>
+  <p class="subtitle">Dijkstra & Floyd-Warshall 🛣️</p>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🛣️ Dijkstra</h2>
+  <div class="info-box">Tìm đường đi ngắn nhất từ 1 đỉnh đến tất cả đỉnh còn lại (trọng số ≥ 0)</div>
+  <pre><code class="language-python">import heapq
+
+def dijkstra(start, adj, n):
+    dist = [float('inf')] * (n + 1)
+    dist[start] = 0
+    pq = [(0, start)]  # (khoảng cách, đỉnh)
+    while pq:
+        d, u = heapq.heappop(pq)
+        if d > dist[u]: continue
+        for v, w in adj[u]:
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                heapq.heappush(pq, (dist[v], v))
+    return dist</code></pre>
+  <div class="info-box fragment">⏱️ O((V + E) log V) với priority queue</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>🏆 Ví dụ Dijkstra</h2>
+  <pre><code class="language-python"># Đọc input: n đỉnh, m cạnh có trọng số
+n, m = map(int, input().split())
+adj = [[] for _ in range(n + 1)]
+for _ in range(m):
+    u, v, w = map(int, input().split())
+    adj[u].append((v, w))
+    adj[v].append((u, w))
+
+dist = dijkstra(1, adj, n)
+for i in range(1, n + 1):
+    print(f"Đỉnh 1 → {i}: {dist[i]}")</code></pre>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>🔄 Floyd-Warshall</h2>
+  <div class="info-box">Tìm đường ngắn nhất giữa <strong>mọi cặp đỉnh</strong> — O(n³)</div>
+  <pre><code class="language-python">def floyd(n, adj_matrix):
+    dist = [row[:] for row in adj_matrix]
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+    return dist</code></pre>
+  <div class="info-box fragment">📌 Dùng khi N ≤ 500 và cần khoảng cách mọi cặp</div>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e)">
+  <h2>📊 Khi nào dùng gì?</h2>
+  <table>
+    <thead><tr><th>Thuật toán</th><th>Khi nào</th><th>Thời gian</th></tr></thead>
+    <tbody>
+      <tr><td>BFS</td><td>Không trọng số</td><td>O(V+E)</td></tr>
+      <tr><td>Dijkstra</td><td>Trọng số ≥ 0, 1 nguồn</td><td>O((V+E)logV)</td></tr>
+      <tr><td>Floyd</td><td>Mọi cặp, N nhỏ</td><td>O(N³)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section data-background-gradient="linear-gradient(135deg,#0a0a1a,#0d1b2a)">
+  <h2>💪 Bài tập</h2>
+  <div class="exercise-card"><div class="exercise-title">Bài 1: Dijkstra cơ bản <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">N đỉnh M cạnh có trọng số. Đường ngắn nhất 1→N</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 2: Floyd cơ bản <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Ma trận kề NxN, tìm khoảng cách mọi cặp</div></div>
+  <div class="exercise-card"><div class="exercise-title">Bài 3: Đường đi qua K đỉnh <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div><div class="exercise-desc">Đường ngắn nhất từ S đến T qua đỉnh trung gian K</div></div>
+</section>
+
+<section class="title-slide" data-background-gradient="linear-gradient(135deg,#0a0a1a,#1a0a2e,#0a1628)">
+  <h1>🎮 +100 XP</h1>
+  <p style="color:var(--text-dim);">Mở khóa: Shortest Path! → Buổi 24: Số học 🔢</p>
+</section>
+
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="js/nav.js"></script>
+<script>Reveal.initialize({hash:true,slideNumber:'c/t',transition:'slide',backgroundTransition:'fade',plugins:[RevealHighlight]});</script>
+</body>
+</html>

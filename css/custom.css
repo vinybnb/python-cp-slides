@@ -1,0 +1,511 @@
+/* ============================================
+   Python CP Slides — Custom Theme
+   Dark "Hacker" Theme for Young Coders
+   ============================================ */
+
+/* ---- Base Reset ---- */
+:root {
+  --primary: #00d4ff;
+  --primary-glow: rgba(0, 212, 255, 0.3);
+  --secondary: #ff6b6b;
+  --accent: #ffd93d;
+  --success: #6bcb77;
+  --purple: #a855f7;
+  --bg-dark: #0a0a1a;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --code-bg: #1e1e2e;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+/* ---- Reveal Overrides ---- */
+.reveal {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 32px;
+  color: var(--text);
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  padding: 20px 40px;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 800;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.reveal h1 {
+  font-size: 2.2em;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3em;
+}
+
+.reveal h2 {
+  font-size: 1.6em;
+  color: var(--primary);
+  margin-bottom: 0.4em;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.reveal h3 {
+  font-size: 1.2em;
+  color: var(--accent);
+  margin-bottom: 0.3em;
+}
+
+.reveal p, .reveal li {
+  font-size: 0.85em;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.reveal ul, .reveal ol {
+  margin-left: 1em;
+}
+
+.reveal li {
+  margin-bottom: 0.4em;
+}
+
+/* ---- Code Blocks ---- */
+.reveal pre {
+  width: 100%;
+  margin: 15px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+}
+
+.reveal pre code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75em;
+  line-height: 1.6;
+  padding: 20px 25px;
+  border-radius: 12px;
+  background: var(--code-bg);
+  max-height: 500px;
+}
+
+.reveal code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--code-bg);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--primary);
+}
+
+/* ---- Tables ---- */
+.reveal table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 15px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 0.75em;
+  border: 1px solid var(--border);
+}
+
+.reveal table thead th {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(168, 85, 247, 0.2));
+  color: var(--primary);
+  font-weight: 700;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--primary);
+}
+
+.reveal table tbody td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.reveal table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal table tbody tr:hover td {
+  background: rgba(0, 212, 255, 0.05);
+}
+
+/* ---- Custom Components ---- */
+
+/* Title Slide */
+.title-slide {
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-slide h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.2em;
+}
+
+.title-slide .subtitle {
+  font-size: 1.1em;
+  color: var(--text-dim);
+  font-weight: 300;
+}
+
+.title-slide .lesson-number {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary), var(--purple));
+  color: #fff;
+  font-size: 0.7em;
+  font-weight: 700;
+  padding: 8px 24px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Info Box / Callout */
+.info-box {
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
+  padding: 16px 20px;
+  border-radius: 0 12px 12px 0;
+  margin: 15px 0;
+  font-size: 0.8em;
+}
+
+.info-box.warning {
+  border-left-color: var(--accent);
+}
+
+.info-box.success {
+  border-left-color: var(--success);
+}
+
+.info-box.danger {
+  border-left-color: var(--secondary);
+}
+
+/* Badge / Tag */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.6em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.badge-cp {
+  background: rgba(168, 85, 247, 0.2);
+  color: var(--purple);
+  border: 1px solid var(--purple);
+}
+
+.badge-new {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.badge-practice {
+  background: rgba(107, 203, 119, 0.2);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+/* Difficulty Stars */
+.difficulty {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.7em;
+  letter-spacing: 2px;
+}
+
+/* Exercise Card */
+.exercise-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 10px 0;
+}
+
+.exercise-card .exercise-title {
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.85em;
+  margin-bottom: 6px;
+}
+
+.exercise-card .exercise-desc {
+  color: var(--text-dim);
+  font-size: 0.75em;
+}
+
+/* Two Column Layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.two-col.wide-left {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.two-col.wide-right {
+  grid-template-columns: 1fr 1.5fr;
+}
+
+/* Concept Card */
+.concept {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.concept .emoji {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.concept .concept-title {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.concept .concept-desc {
+  font-size: 0.75em;
+  color: var(--text-dim);
+}
+
+/* Progress / XP Bar */
+.xp-bar {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  height: 20px;
+  width: 100%;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.xp-bar .xp-fill {
+  height: 100%;
+  border-radius: 50px;
+  background: linear-gradient(90deg, var(--primary), var(--purple));
+  transition: width 1s ease;
+}
+
+/* Key Point */
+.key-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 10px 0;
+  font-size: 0.8em;
+}
+
+.key-point .icon {
+  font-size: 1.3em;
+  flex-shrink: 0;
+}
+
+/* Flowchart-style boxes */
+.flow-box {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.75em;
+  margin: 4px;
+}
+
+.flow-box.input {
+  background: rgba(0, 212, 255, 0.15);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.flow-box.process {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid var(--purple);
+  color: var(--purple);
+}
+
+.flow-box.output {
+  background: rgba(107, 203, 119, 0.15);
+  border: 1px solid var(--success);
+  color: var(--success);
+}
+
+.flow-box.decision {
+  background: rgba(255, 217, 61, 0.15);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  transform: rotate(0deg);
+}
+
+.flow-arrow {
+  display: inline-block;
+  color: var(--text-dim);
+  font-size: 1.2em;
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+/* Highlight text */
+.highlight {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.highlight-accent {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.highlight-success {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.highlight-secondary {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+/* Slide background variations */
+.reveal .slides section[data-background-gradient] {
+  color: #fff;
+}
+
+/* Summary slide */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 15px;
+}
+
+.summary-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.summary-item .summary-icon {
+  font-size: 1.5em;
+  margin-bottom: 8px;
+}
+
+.summary-item .summary-label {
+  font-size: 0.7em;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.summary-item .summary-value {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Competition scoreboard */
+.scoreboard {
+  background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(255, 107, 107, 0.1));
+  border: 1px solid rgba(255, 217, 61, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.scoreboard h3 {
+  text-align: center;
+  color: var(--accent);
+}
+
+/* Slide number styling */
+.reveal .slide-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--primary);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Fragment animations */
+.reveal .fragment.grow-in {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.5s ease;
+}
+
+.reveal .fragment.grow-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Quiz option */
+.quiz-option {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quiz-option:hover {
+  border-color: var(--primary);
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.quiz-option.correct {
+  border-color: var(--success);
+  background: rgba(107, 203, 119, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+  
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Print styles */
+@media print {
+  .reveal pre code {
+    max-height: none;
+  }
+}

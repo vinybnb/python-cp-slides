@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buổi 5 — String & Mini Competition 🏆</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- Title -->
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #0a0a1a 0%, #2e0a0a 50%, #0a1628 100%)">
+  <div class="lesson-number">Buổi 05</div>
+  <h1>String & Tổng hợp<br>🏆 Mini Competition!</h1>
+  <p class="subtitle">Xử lý chuỗi + Thi đấu thực tế đầu tiên</p>
+</section>
+
+<!-- String basics -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🔤 String (Chuỗi) cơ bản</h2>
+  <p>String = dãy các ký tự, có thể <span class="highlight">duyệt như list</span></p>
+  <pre><code class="language-python">s = "Hello CP"
+
+# Truy cập ký tự
+print(s[0])     # H
+print(s[-1])    # P
+print(len(s))   # 8
+
+# Duyệt từng ký tự
+for ch in s:
+    print(ch, end=" ")
+# H e l l o   C P</code></pre>
+  <div class="info-box fragment">📌 String trong Python là <strong>immutable</strong> — không thể sửa từng ký tự!</div>
+</section>
+
+<!-- String methods -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🛠️ Các hàm String hữu ích</h2>
+  <table>
+    <thead><tr><th>Hàm</th><th>Công dụng</th><th>Ví dụ</th></tr></thead>
+    <tbody>
+      <tr><td><code>.upper()</code></td><td>Chuyển thành HOA</td><td><code>"hello".upper()</code> → <code>"HELLO"</code></td></tr>
+      <tr><td><code>.lower()</code></td><td>Chuyển thành thường</td><td><code>"HELLO".lower()</code> → <code>"hello"</code></td></tr>
+      <tr><td><code>.isdigit()</code></td><td>Kiểm tra toàn số</td><td><code>"123".isdigit()</code> → <code>True</code></td></tr>
+      <tr><td><code>.isalpha()</code></td><td>Kiểm tra toàn chữ</td><td><code>"abc".isalpha()</code> → <code>True</code></td></tr>
+      <tr><td><code>.count(x)</code></td><td>Đếm lần xuất hiện</td><td><code>"hello".count("l")</code> → <code>2</code></td></tr>
+      <tr><td><code>.replace(a,b)</code></td><td>Thay thế</td><td><code>"cat".replace("c","b")</code> → <code>"bat"</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ord() chr() -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🔢 <code>ord()</code> và <code>chr()</code></h2>
+  <p>Mỗi ký tự có một <span class="highlight">mã số ASCII</span></p>
+  <pre><code class="language-python"># ord() → Ký tự thành số
+print(ord('A'))   # 65
+print(ord('a'))   # 97
+print(ord('0'))   # 48
+
+# chr() → Số thành ký tự
+print(chr(65))    # A
+print(chr(97))    # a</code></pre>
+  <div class="info-box fragment">
+    💡 <strong>Mẹo quan trọng:</strong><br>
+    • <code>'A'</code> đến <code>'Z'</code>: mã 65–90<br>
+    • <code>'a'</code> đến <code>'z'</code>: mã 97–122<br>
+    • <code>'0'</code> đến <code>'9'</code>: mã 48–57
+  </div>
+</section>
+
+<!-- Palindrome -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🏆 Bài CP: Palindrome</h2>
+  <div class="info-box">
+    📋 <strong>Palindrome</strong> = chuỗi đọc xuôi giống đọc ngược<br>
+    VD: "madam", "12321", "abcba"
+  </div>
+  <pre class="fragment"><code class="language-python">s = input()
+
+# Cách 1: So sánh với chuỗi đảo
+if s == s[::-1]:
+    print("YES")
+else:
+    print("NO")
+
+# Cách 2: So sánh 2 đầu (tư duy CP)
+ok = True
+for i in range(len(s) // 2):
+    if s[i] != s[len(s) - 1 - i]:
+        ok = False
+        break
+print("YES" if ok else "NO")</code></pre>
+  <div class="info-box success fragment">
+    💡 <code>s[::-1]</code> là cách đảo chuỗi ngắn nhất trong Python!
+  </div>
+</section>
+
+<!-- Caesar Cipher -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🔐 Bài CP: Mã hóa Caesar</h2>
+  <div class="info-box">
+    📋 Dịch mỗi chữ cái đi <strong>K</strong> vị trí trong bảng chữ cái.<br>
+    VD: K=3 → A→D, B→E, ..., X→A, Y→B, Z→C
+  </div>
+  <pre class="fragment"><code class="language-python">s = input()
+k = int(input())
+result = ""
+
+for ch in s:
+    if ch.isalpha():
+        base = ord('A') if ch.isupper() else ord('a')
+        # Dịch k vị trí, quay vòng bằng % 26
+        new_ch = chr((ord(ch) - base + k) % 26 + base)
+        result += new_ch
+    else:
+        result += ch  # Giữ nguyên ký tự không phải chữ
+
+print(result)</code></pre>
+  <div class="info-box fragment">
+    📌 <code>% 26</code> giúp quay vòng: Z + 1 → A
+  </div>
+</section>
+
+<!-- Tóm tắt toàn bộ -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>📚 Tóm tắt 5 buổi học</h2>
+  <div class="summary-grid">
+    <div class="summary-item"><div class="summary-icon">📥📤</div><div class="summary-label">Buổi 1</div><div class="summary-value">print, input, biến, phép toán</div></div>
+    <div class="summary-item"><div class="summary-icon">🔀</div><div class="summary-label">Buổi 2</div><div class="summary-value">if / elif / else, logic</div></div>
+    <div class="summary-item"><div class="summary-icon">🔁</div><div class="summary-label">Buổi 3</div><div class="summary-value">for, while, brute force</div></div>
+    <div class="summary-item"><div class="summary-icon">📦</div><div class="summary-label">Buổi 4</div><div class="summary-value">List, duyệt mảng, input CP</div></div>
+  </div>
+  <div class="concept fragment" style="margin-top:15px;">
+    <div class="emoji">🔤</div>
+    <div class="concept-title">Buổi 5 — String</div>
+    <div class="concept-desc">Duyệt chuỗi, ord/chr, palindrome, Caesar cipher</div>
+  </div>
+</section>
+
+<!-- Hướng dẫn thi -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>📋 Hướng dẫn Mini Competition</h2>
+  <div class="key-point"><span class="icon">⏱️</span><span>Thời gian: <span class="highlight">55 phút</span></span></div>
+  <div class="key-point"><span class="icon">📝</span><span>Số bài: <span class="highlight">5 bài</span> (A → E), từ dễ đến khó</span></div>
+  <div class="key-point"><span class="icon">💻</span><span>Nộp bài trên: VNOJ hoặc trang contest</span></div>
+  <div class="key-point"><span class="icon">🏆</span><span>Xếp hạng theo: <span class="highlight">số bài đúng</span> → thời gian nộp</span></div>
+  <table class="fragment" style="margin-top:15px;">
+    <thead><tr><th>Verdict</th><th>Ý nghĩa</th><th>Hành động</th></tr></thead>
+    <tbody>
+      <tr><td><code style="color:var(--success);">AC</code></td><td>Đúng!</td><td>Chuyển bài tiếp theo 🎉</td></tr>
+      <tr><td><code style="color:var(--secondary);">WA</code></td><td>Sai</td><td>Kiểm tra edge cases, thử lại</td></tr>
+      <tr><td><code style="color:var(--accent);">TLE</code></td><td>Quá chậm</td><td>Tối ưu thuật toán</td></tr>
+      <tr><td><code style="color:var(--purple);">RE</code></td><td>Lỗi chạy</td><td>Debug: chia cho 0? index sai?</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Contest bắt đầu -->
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #1a0a0a, #2e1a0a, #0a1628)">
+  <h1>🏆 MINI COMPETITION</h1>
+  <p class="subtitle" style="font-size:1.3em;">Bắt đầu!</p>
+  <p style="font-size:0.8em; color:var(--accent); margin-top:20px;">⏱️ 55 phút — 5 bài — Good luck! 🍀</p>
+</section>
+
+<!-- Bài A -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>📋 Bài A: Tổng chữ số <span style="float:right;font-size:0.6em;color:var(--success);">100 điểm</span></h2>
+  <div class="info-box">
+    <strong>Đề bài:</strong> Nhập số nguyên dương N (1 ≤ N ≤ 10⁹). In ra tổng các chữ số của N.<br><br>
+    <strong>Ví dụ:</strong><br>
+    Input: <code>1234</code> → Output: <code>10</code><br>
+    Input: <code>999</code> → Output: <code>27</code>
+  </div>
+  <p style="font-size:0.7em;color:var(--text-dim);">Gợi ý: Dùng vòng while + phép chia dư % 10</p>
+</section>
+
+<!-- Bài B -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>📋 Bài B: Palindrome <span style="float:right;font-size:0.6em;color:var(--success);">100 điểm</span></h2>
+  <div class="info-box">
+    <strong>Đề bài:</strong> Nhập chuỗi S (chỉ chứa chữ cái thường, 1 ≤ |S| ≤ 10⁵). Kiểm tra S có phải palindrome không.<br><br>
+    <strong>Ví dụ:</strong><br>
+    Input: <code>madam</code> → Output: <code>YES</code><br>
+    Input: <code>hello</code> → Output: <code>NO</code>
+  </div>
+  <p style="font-size:0.7em;color:var(--text-dim);">Gợi ý: So sánh chuỗi với chuỗi đảo ngược</p>
+</section>
+
+<!-- Bài C -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>📋 Bài C: Đếm nguyên tố <span style="float:right;font-size:0.6em;color:var(--accent);">150 điểm</span></h2>
+  <div class="info-box">
+    <strong>Đề bài:</strong> Nhập 2 số A, B (2 ≤ A ≤ B ≤ 10⁶). Đếm số nguyên tố trong đoạn [A, B].<br><br>
+    <strong>Ví dụ:</strong><br>
+    Input: <code>2 10</code> → Output: <code>4</code> (các số: 2, 3, 5, 7)
+  </div>
+  <p style="font-size:0.7em;color:var(--text-dim);">Gợi ý: Viết hàm kiểm tra nguyên tố, duyệt từ A đến B</p>
+</section>
+
+<!-- Bài D -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>📋 Bài D: Số lớn thứ 2 <span style="float:right;font-size:0.6em;color:var(--accent);">150 điểm</span></h2>
+  <div class="info-box">
+    <strong>Đề bài:</strong> Nhập mảng N số (2 ≤ N ≤ 10⁵). Tìm số lớn thứ 2 (giá trị khác max).<br><br>
+    <strong>Ví dụ:</strong><br>
+    Input: <code>5</code><br><code>3 1 4 4 2</code> → Output: <code>3</code><br>
+    (Max = 4, số lớn thứ 2 khác max = 3)
+  </div>
+  <p style="font-size:0.7em;color:var(--text-dim);">Gợi ý: Tìm max trước, rồi tìm max trong các phần tử ≠ max</p>
+</section>
+
+<!-- Bài E -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>📋 Bài E: Caesar Cipher <span style="float:right;font-size:0.6em;color:var(--secondary);">200 điểm</span></h2>
+  <div class="info-box">
+    <strong>Đề bài:</strong> Nhập chuỗi S và số K. Mã hóa Caesar: dịch mỗi chữ cái đi K vị trí, giữ nguyên ký tự khác.<br><br>
+    <strong>Ví dụ:</strong><br>
+    Input: <code>Hello, World!</code><br><code>3</code><br>
+    Output: <code>Khoor, Zruog!</code>
+  </div>
+  <p style="font-size:0.7em;color:var(--text-dim);">Gợi ý: Dùng ord(), chr(), % 26 để quay vòng</p>
+</section>
+
+<!-- Hết giờ / Chữa bài -->
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #1a0a0a, #0a0a1a, #0a1628)">
+  <h1>⏰ Hết giờ!</h1>
+  <p class="subtitle">Nộp bài và cùng chữa nhé!</p>
+</section>
+
+<!-- Lời giải A -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>✅ Lời giải Bài A — Tổng chữ số</h2>
+  <pre><code class="language-python">n = int(input())
+tong = 0
+while n > 0:
+    tong += n % 10   # Lấy chữ số cuối
+    n //= 10         # Bỏ chữ số cuối
+print(tong)</code></pre>
+  <div class="info-box success">
+    💡 <strong>Cách khác</strong> dùng string:
+    <code>print(sum(int(ch) for ch in input()))</code>
+  </div>
+</section>
+
+<!-- Lời giải B -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>✅ Lời giải Bài B — Palindrome</h2>
+  <pre><code class="language-python">s = input()
+print("YES" if s == s[::-1] else "NO")</code></pre>
+</section>
+
+<!-- Lời giải C -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>✅ Lời giải Bài C — Đếm nguyên tố</h2>
+  <pre><code class="language-python">def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+a, b = map(int, input().split())
+dem = 0
+for x in range(a, b + 1):
+    if is_prime(x):
+        dem += 1
+print(dem)</code></pre>
+</section>
+
+<!-- Lời giải D -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>✅ Lời giải Bài D — Số lớn thứ 2</h2>
+  <pre><code class="language-python">n = int(input())
+a = list(map(int, input().split()))
+
+max_val = max(a)
+second = -float('inf')  # Âm vô cùng
+
+for x in a:
+    if x != max_val and x > second:
+        second = x
+
+print(second)</code></pre>
+</section>
+
+<!-- Lời giải E -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>✅ Lời giải Bài E — Caesar Cipher</h2>
+  <pre><code class="language-python">s = input()
+k = int(input())
+result = ""
+
+for ch in s:
+    if ch.isalpha():
+        base = ord('A') if ch.isupper() else ord('a')
+        result += chr((ord(ch) - base + k) % 26 + base)
+    else:
+        result += ch
+
+print(result)</code></pre>
+</section>
+
+<!-- Bảng xếp hạng -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🏆 Bảng xếp hạng</h2>
+  <div class="scoreboard">
+    <h3>📊 Kết quả Mini Competition</h3>
+  </div>
+  <table>
+    <thead><tr><th>Hạng</th><th>Tên</th><th>A (100)</th><th>B (100)</th><th>C (150)</th><th>D (150)</th><th>E (200)</th><th>Tổng</th></tr></thead>
+    <tbody>
+      <tr><td>🥇</td><td>???</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>🥈</td><td>???</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>🥉</td><td>???</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="fragment" style="text-align:center;margin-top:15px;font-size:0.8em;">🎉 Tất cả các bạn đều là nhà vô địch — vì đã dám bắt đầu!</p>
+</section>
+
+<!-- What's next -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🚀 Tiếp theo là gì?</h2>
+  <div class="key-point fragment"><span class="icon">📘</span><span>Buổi 6-7: <span class="highlight">Hàm (Function) & Đệ quy (Recursion)</span></span></div>
+  <div class="key-point fragment"><span class="icon">📘</span><span>Buổi 8-10: <span class="highlight">Sắp xếp & Tìm kiếm nhị phân</span></span></div>
+  <div class="key-point fragment"><span class="icon">📘</span><span>Buổi 11+: <span class="highlight">CTDL: Stack, Queue, Set, Dict</span></span></div>
+  <div class="key-point fragment"><span class="icon">📘</span><span>Buổi 20+: <span class="highlight">Graph, DP, Greedy</span> → Sẵn sàng thi!</span></div>
+  <div class="info-box success fragment" style="margin-top:15px;">
+    🎯 <strong>Mục tiêu:</strong> Sau 45-50 buổi → Sẵn sàng thi HSG Thành phố!
+  </div>
+</section>
+
+<!-- Level up! -->
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #0a0a1a, #2e0a1a, #0a1628)">
+  <h1>🎮 LEVEL UP!</h1>
+  <p style="font-size:1.1em; color:var(--accent); margin-bottom:20px;">🌟 Level 2 đạt được!</p>
+  <div style="max-width:400px; margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; font-size:0.6em; margin-bottom:4px;">
+      <span style="color:var(--accent);">★ Level 2</span><span class="highlight">500 XP</span>
+    </div>
+    <div class="xp-bar"><div class="xp-fill" style="width:100%; background:linear-gradient(90deg, var(--accent), var(--secondary));"></div></div>
+    <p style="font-size:0.6em; color:var(--text-dim); margin-top:8px;">Level 2 Unlocked! 🏆</p>
+  </div>
+  <p style="margin-top:30px; font-size:0.8em;">Chúc mừng hoàn thành Giai đoạn 1! 🎉</p>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>Reveal.initialize({ hash:true, slideNumber:'c/t', transition:'slide', backgroundTransition:'fade', plugins:[RevealHighlight] });</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buổi 1 — Chào mừng đến thế giới Lập trình Thi đấu</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- SLIDE 1: Title -->
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a1628 100%)">
+  <div class="lesson-number">Buổi 01</div>
+  <h1>Chào mừng đến thế giới<br>Lập Trình Thi Đấu</h1>
+  <p class="subtitle">Competitive Programming với Python 🐍</p>
+</section>
+
+<!-- SLIDE 2: Mục tiêu -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🎯 Mục tiêu buổi học</h2>
+  <div class="key-point fragment"><span class="icon">🌟</span><span>Hiểu <span class="highlight">Competitive Programming</span> là gì và tại sao nên học</span></div>
+  <div class="key-point fragment"><span class="icon">💻</span><span>Cài đặt môi trường: Python + VS Code</span></div>
+  <div class="key-point fragment"><span class="icon">🐍</span><span>Viết chương trình Python đầu tiên</span></div>
+  <div class="key-point fragment"><span class="icon">🏆</span><span>Giải bài tập đầu tiên trên Online Judge</span></div>
+</section>
+
+<!-- SLIDE 3: CP là gì -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🤔 Competitive Programming là gì?</h2>
+  <div class="concept fragment">
+    <div class="emoji">🧩</div>
+    <div class="concept-title">Giải bài toán bằng Code trong thời gian giới hạn</div>
+    <div class="concept-desc">Giống như thi Toán, nhưng thay vì dùng giấy bút → dùng máy tính!</div>
+  </div>
+  <div class="two-col" style="margin-top:20px;">
+    <div class="fragment">
+      <h3>📝 Thi Toán truyền thống</h3>
+      <ul><li>Giải bằng tay</li><li>Viết lời giải trên giấy</li><li>Giám khảo chấm</li></ul>
+    </div>
+    <div class="fragment">
+      <h3>💻 Competitive Programming</h3>
+      <ul><li>Giải bằng code</li><li>Submit lên máy chủ</li><li><span class="highlight">Máy tính chấm tự động!</span></li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: Tại sao học CP -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🚀 Tại sao nên học CP?</h2>
+  <div class="summary-grid">
+    <div class="summary-item fragment"><div class="summary-icon">🧠</div><div class="summary-label">Tư duy</div><div class="summary-value">Rèn tư duy logic & sáng tạo</div></div>
+    <div class="summary-item fragment"><div class="summary-icon">🏅</div><div class="summary-label">Thành tích</div><div class="summary-value">Thi HSG Thành phố, Quốc gia</div></div>
+    <div class="summary-item fragment"><div class="summary-icon">🎓</div><div class="summary-label">Tương lai</div><div class="summary-value">Học bổng & tuyển thẳng ĐH</div></div>
+    <div class="summary-item fragment"><div class="summary-icon">💼</div><div class="summary-label">Career</div><div class="summary-value">Google, Facebook tuyển dụng từ CP</div></div>
+  </div>
+</section>
+
+<!-- SLIDE 5: Hành trình -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🗺️ Hành trình của chúng ta</h2>
+  <div style="text-align:center; margin-top:20px;">
+    <span class="flow-box input">Hello World</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box process">Thuật toán cơ bản</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box decision">HSG Thành phố</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box output">HSG Quốc gia</span>
+  </div>
+  <div style="text-align:center; margin-top:20px;">
+    <span class="flow-box output">🌏 APIO</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box output" style="border-color:var(--accent);color:var(--accent);">🏆 IOI</span>
+  </div>
+  <div class="info-box success fragment" style="margin-top:30px;">
+    <strong>Hôm nay:</strong> Chúng ta bắt đầu bước đầu tiên — viết chương trình Python đầu tiên!
+  </div>
+</section>
+
+<!-- SLIDE 6: Cài đặt -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>⚙️ Cài đặt môi trường</h2>
+  <div class="key-point fragment"><span class="icon">1️⃣</span><span>Tải <span class="highlight">Python</span> tại <code>python.org</code> → Nhấn Download → Cài đặt (✅ Add to PATH)</span></div>
+  <div class="key-point fragment"><span class="icon">2️⃣</span><span>Tải <span class="highlight">VS Code</span> tại <code>code.visualstudio.com</code> → Cài đặt</span></div>
+  <div class="key-point fragment"><span class="icon">3️⃣</span><span>Mở VS Code → Cài Extension <span class="highlight">Python</span> (Microsoft)</span></div>
+  <div class="key-point fragment"><span class="icon">4️⃣</span><span>Tạo tài khoản <span class="highlight">VNOJ</span> tại <code>oj.vnoi.info</code></span></div>
+  <div class="info-box fragment" style="margin-top:20px;">
+    💡 <strong>VNOJ</strong> (Vietnam Online Judge) — nơi luyện đề thi CP dành cho học sinh Việt Nam
+  </div>
+</section>
+
+<!-- SLIDE 7: print() -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🖨️ Lệnh đầu tiên: <code>print()</code></h2>
+  <p><code>print()</code> dùng để <span class="highlight">in ra màn hình</span></p>
+  <pre><code class="language-python"># Chương trình đầu tiên!
+print("Hello World!")
+print("Tôi đang học Competitive Programming")
+print("Python thật tuyệt vời! 🐍")</code></pre>
+  <div class="info-box success fragment">
+    <strong>Kết quả:</strong><br>
+    Hello World!<br>
+    Tôi đang học Competitive Programming<br>
+    Python thật tuyệt vời! 🐍
+  </div>
+</section>
+
+<!-- SLIDE 8: Biến -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>📦 Biến (Variable)</h2>
+  <p>Biến giống như <span class="highlight">hộp chứa dữ liệu</span> — đặt tên để dùng lại</p>
+  <pre><code class="language-python"># Tạo biến
+ten = "Minh"
+tuoi = 12
+diem_toan = 9.5
+
+# Sử dụng biến
+print("Xin chào, tôi là", ten)
+print("Năm nay tôi", tuoi, "tuổi")
+print("Điểm Toán:", diem_toan)</code></pre>
+  <div class="info-box fragment">
+    📌 <strong>Quy tắc đặt tên biến:</strong> Không bắt đầu bằng số, không có dấu cách, nên dùng tiếng Anh
+  </div>
+</section>
+
+<!-- SLIDE 9: Kiểu dữ liệu -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>📊 Kiểu dữ liệu cơ bản</h2>
+  <table>
+    <thead><tr><th>Kiểu</th><th>Ý nghĩa</th><th>Ví dụ</th></tr></thead>
+    <tbody>
+      <tr><td><code>int</code></td><td>Số nguyên</td><td><code>42</code>, <code>-7</code>, <code>0</code></td></tr>
+      <tr><td><code>float</code></td><td>Số thực (có phần thập phân)</td><td><code>3.14</code>, <code>-2.5</code></td></tr>
+      <tr><td><code>str</code></td><td>Chuỗi ký tự (text)</td><td><code>"Hello"</code>, <code>"CP"</code></td></tr>
+      <tr><td><code>bool</code></td><td>Đúng / Sai</td><td><code>True</code>, <code>False</code></td></tr>
+    </tbody>
+  </table>
+  <pre class="fragment"><code class="language-python"># Kiểm tra kiểu dữ liệu
+print(type(42))       # &lt;class 'int'&gt;
+print(type(3.14))     # &lt;class 'float'&gt;
+print(type("Hello"))  # &lt;class 'str'&gt;</code></pre>
+</section>
+
+<!-- SLIDE 10: input() -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>⌨️ Nhập dữ liệu: <code>input()</code></h2>
+  <pre><code class="language-python"># Nhập tên
+ten = input("Nhập tên của bạn: ")
+print("Xin chào", ten)
+
+# Nhập số (phải chuyển đổi!)
+tuoi = int(input("Nhập tuổi: "))
+print("Năm sau bạn", tuoi + 1, "tuổi")</code></pre>
+  <div class="info-box warning fragment">
+    ⚠️ <strong>Lưu ý quan trọng:</strong> <code>input()</code> luôn trả về <code>str</code>.<br>
+    Muốn tính toán → phải chuyển bằng <code>int()</code> hoặc <code>float()</code>
+  </div>
+</section>
+
+<!-- SLIDE 11: Phép toán -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🔢 Phép toán trong Python</h2>
+  <table>
+    <thead><tr><th>Phép toán</th><th>Ký hiệu</th><th>Ví dụ</th><th>Kết quả</th></tr></thead>
+    <tbody>
+      <tr><td>Cộng</td><td><code>+</code></td><td><code>5 + 3</code></td><td><code>8</code></td></tr>
+      <tr><td>Trừ</td><td><code>-</code></td><td><code>10 - 4</code></td><td><code>6</code></td></tr>
+      <tr><td>Nhân</td><td><code>*</code></td><td><code>3 * 7</code></td><td><code>21</code></td></tr>
+      <tr><td>Chia</td><td><code>/</code></td><td><code>10 / 3</code></td><td><code>3.333</code></td></tr>
+      <tr><td>Chia lấy phần nguyên</td><td><code>//</code></td><td><code>10 // 3</code></td><td><code>3</code></td></tr>
+      <tr><td>Chia lấy dư</td><td><code>%</code></td><td><code>10 % 3</code></td><td><code>1</code></td></tr>
+      <tr><td>Lũy thừa</td><td><code>**</code></td><td><code>2 ** 10</code></td><td><code>1024</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SLIDE 12: CP Format -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🏆 Format bài thi CP</h2>
+  <p>Trong CP, bài toán luôn có dạng: <span class="highlight">Đọc Input → Xử lý → In Output</span></p>
+  <div style="text-align:center; margin:20px 0;">
+    <span class="flow-box input">📥 Input</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box process">⚙️ Xử lý</span>
+    <span class="flow-arrow">→</span>
+    <span class="flow-box output">📤 Output</span>
+  </div>
+  <div class="two-col fragment">
+    <div>
+      <h3>📥 Ví dụ Input</h3>
+      <pre><code>3 5</code></pre>
+    </div>
+    <div>
+      <h3>📤 Output mong đợi</h3>
+      <pre><code>8</code></pre>
+    </div>
+  </div>
+  <pre class="fragment"><code class="language-python"># Lời giải: Tính tổng 2 số
+a, b = map(int, input().split())
+print(a + b)</code></pre>
+</section>
+
+<!-- SLIDE 13: Giải thích câu thần chú -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🪄 Giải mã "câu thần chú"</h2>
+  <pre><code class="language-python">a, b = map(int, input().split())</code></pre>
+  <div class="key-point fragment"><span class="icon">1️⃣</span><span><code>input()</code> → đọc dòng: <code>"3 5"</code></span></div>
+  <div class="key-point fragment"><span class="icon">2️⃣</span><span><code>.split()</code> → tách bởi dấu cách: <code>["3", "5"]</code></span></div>
+  <div class="key-point fragment"><span class="icon">3️⃣</span><span><code>map(int, ...)</code> → chuyển mỗi phần tử thành số: <code>3, 5</code></span></div>
+  <div class="key-point fragment"><span class="icon">4️⃣</span><span><code>a, b = ...</code> → gán: <code>a = 3</code>, <code>b = 5</code></span></div>
+  <div class="info-box success fragment">
+    ✨ <strong>Mẹo:</strong> Học thuộc pattern này — dùng trong hầu hết mọi bài CP!
+  </div>
+</section>
+
+<!-- SLIDE 14: Demo VNOJ -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🖥️ Demo: Submit bài trên VNOJ</h2>
+  <div class="key-point"><span class="icon">1️⃣</span><span>Truy cập <code>oj.vnoi.info</code> → Đăng nhập</span></div>
+  <div class="key-point"><span class="icon">2️⃣</span><span>Tìm bài <span class="highlight">A + B Problem</span></span></div>
+  <div class="key-point"><span class="icon">3️⃣</span><span>Đọc đề: Input gồm gì? Output yêu cầu gì?</span></div>
+  <div class="key-point"><span class="icon">4️⃣</span><span>Viết code trong VS Code → Copy paste lên VNOJ</span></div>
+  <div class="key-point"><span class="icon">5️⃣</span><span>Chọn ngôn ngữ <span class="highlight">Python 3</span> → Nhấn <span class="highlight-success">Submit</span></span></div>
+  <table class="fragment" style="margin-top:20px;">
+    <thead><tr><th>Verdict</th><th>Ý nghĩa</th><th>Emoji</th></tr></thead>
+    <tbody>
+      <tr><td><code style="color:var(--success);">AC</code></td><td>Accepted — Đúng!</td><td>✅</td></tr>
+      <tr><td><code style="color:var(--secondary);">WA</code></td><td>Wrong Answer — Sai kết quả</td><td>❌</td></tr>
+      <tr><td><code style="color:var(--accent);">TLE</code></td><td>Time Limit Exceeded — Chạy quá lâu</td><td>⏰</td></tr>
+      <tr><td><code style="color:var(--purple);">RE</code></td><td>Runtime Error — Lỗi khi chạy</td><td>💥</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SLIDE 15: Tóm tắt -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>📝 Tóm tắt buổi 1</h2>
+  <div class="summary-grid">
+    <div class="summary-item"><div class="summary-icon">🖨️</div><div class="summary-label">In ra</div><div class="summary-value">print()</div></div>
+    <div class="summary-item"><div class="summary-icon">⌨️</div><div class="summary-label">Nhập vào</div><div class="summary-value">input()</div></div>
+    <div class="summary-item"><div class="summary-icon">📦</div><div class="summary-label">Lưu trữ</div><div class="summary-value">Biến (variable)</div></div>
+    <div class="summary-item"><div class="summary-icon">🔢</div><div class="summary-label">Tính toán</div><div class="summary-value">+ - * / // % **</div></div>
+  </div>
+  <div class="info-box" style="margin-top:20px;">
+    🪄 <strong>Câu thần chú CP:</strong> <code>a, b = map(int, input().split())</code>
+  </div>
+</section>
+
+<!-- SLIDE 16: Bài tập -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>💪 Bài tập thực hành</h2>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 1: Hello World <span class="difficulty">⭐</span></div>
+    <div class="exercise-desc">In ra tên, tuổi, trường học của em trên 3 dòng khác nhau</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 2: Tổng hai số <span class="difficulty">⭐</span></div>
+    <div class="exercise-desc">Nhập 2 số a, b từ bàn phím. In ra tổng, hiệu, tích của chúng</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 3: Hình chữ nhật <span class="difficulty">⭐</span></div>
+    <div class="exercise-desc">Nhập chiều dài và chiều rộng. In ra chu vi và diện tích</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 4: A + B trên VNOJ <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div>
+    <div class="exercise-desc">Đọc 2 số trên cùng 1 dòng, in ra tổng. Submit lên VNOJ!</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 5: Đổi giây <span class="difficulty">⭐⭐</span></div>
+    <div class="exercise-desc">Nhập số giây S, đổi sang dạng H giờ M phút S giây (dùng // và %)</div>
+  </div>
+</section>
+
+<!-- SLIDE 17: Bài tập về nhà -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🏠 Bài tập về nhà</h2>
+  <div class="key-point"><span class="icon">📌</span><span>Giải <span class="highlight">3 bài đầu tiên</span> trên VNOJ (mục Beginner)</span></div>
+  <div class="key-point"><span class="icon">📌</span><span>Tự nghĩ ra 2 chương trình dùng <code>input()</code> và <code>print()</code></span></div>
+  <div class="key-point"><span class="icon">📌</span><span>Ghi nhớ: <code>int()</code>, <code>float()</code>, <code>.split()</code>, <code>map()</code></span></div>
+  <div class="concept fragment" style="margin-top:30px;">
+    <div class="emoji">👀</div>
+    <div class="concept-title">Preview Buổi 2</div>
+    <div class="concept-desc">Rẽ nhánh — if / elif / else<br>Dạy máy tính biết <strong>ra quyết định</strong>!</div>
+  </div>
+</section>
+
+<!-- SLIDE 18: XP -->
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e, #0a1628)">
+  <h1>🎮 XP Earned!</h1>
+  <p style="font-size:0.9em; color:var(--text-dim); margin-bottom:20px;">Buổi 1 hoàn thành — Level 1 đạt được!</p>
+  <div style="max-width:400px; margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; font-size:0.6em; margin-bottom:4px;">
+      <span>Level 1</span><span class="highlight">100 XP</span>
+    </div>
+    <div class="xp-bar"><div class="xp-fill" style="width:20%"></div></div>
+    <p style="font-size:0.6em; color:var(--text-dim); margin-top:8px;">100 / 500 XP → Level 2</p>
+  </div>
+  <p style="margin-top:30px; font-size:0.7em;">Hẹn gặp lại ở <span class="highlight">Buổi 2</span>! 🚀</p>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: 'c/t',
+  transition: 'slide',
+  backgroundTransition: 'fade',
+  plugins: [RevealHighlight]
+});
+</script>
+</body>
+</html>

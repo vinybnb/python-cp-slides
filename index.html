@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Competitive Programming — Khóa học cho Trẻ em</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --purple: #a855f7;
+            --accent: #ffd93d;
+            --success: #6bcb77;
+            --secondary: #ff6b6b;
+            --bg: #0a0a1a;
+            --card: rgba(255,255,255,0.04);
+            --border: rgba(255,255,255,0.08);
+            --text: #e2e8f0;
+            --dim: #64748b;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(0,212,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(168,85,247,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255,107,107,0.04) 0%, transparent 50%);
+            z-index: -1;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .header .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 20px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--purple), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header p {
+            font-size: 18px;
+            color: var(--dim);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        /* Stats bar */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .stat-label {
+            font-size: 13px;
+            color: var(--dim);
+            margin-top: 4px;
+        }
+        /* Lesson cards */
+        .lessons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .lesson-card {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(0,212,255,0.03));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lesson-card:hover {
+            border-color: rgba(0,212,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px rgba(0,212,255,0.1);
+        }
+        .lesson-card:hover::before {
+            opacity: 1;
+        }
+        .lesson-num {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .lesson-num.l1 { background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.05)); color: var(--primary); border: 1px solid rgba(0,212,255,0.3); }
+        .lesson-num.l2 { background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(168,85,247,0.05)); color: var(--purple); border: 1px solid rgba(168,85,247,0.3); }
+        .lesson-num.l3 { background: linear-gradient(135deg, rgba(255,217,61,0.2), rgba(255,217,61,0.05)); color: var(--accent); border: 1px solid rgba(255,217,61,0.3); }
+        .lesson-num.l4 { background: linear-gradient(135deg, rgba(107,203,119,0.2), rgba(107,203,119,0.05)); color: var(--success); border: 1px solid rgba(107,203,119,0.3); }
+        .lesson-num.l5 { background: linear-gradient(135deg, rgba(255,107,107,0.2), rgba(255,107,107,0.05)); color: var(--secondary); border: 1px solid rgba(255,107,107,0.3); }
+        .lesson-info {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        .lesson-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .lesson-desc {
+            font-size: 14px;
+            color: var(--dim);
+            line-height: 1.5;
+        }
+        .lesson-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .lesson-badge {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.05);
+            color: var(--dim);
+            border: 1px solid var(--border);
+        }
+        .lesson-arrow {
+            font-size: 20px;
+            color: var(--dim);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .lesson-card:hover .lesson-arrow {
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+        .footer p {
+            font-size: 13px;
+            color: var(--dim);
+        }
+        .footer .tech {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--primary);
+        }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 32px; }
+            .stats { gap: 24px; }
+            .lesson-card { flex-direction: column; text-align: center; padding: 20px; }
+            .lesson-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="tag">🐍 Python Competitive Programming</div>
+            <h1>Lập Trình Thi Đấu<br>cho Trẻ Em</h1>
+            <p>Hành trình từ <strong>Hello World</strong> đến <strong>IOI</strong> — Xây dựng nền tảng tư duy thuật toán qua ngôn ngữ Python</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">5</div>
+                <div class="stat-label">Buổi học</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">120'</div>
+                <div class="stat-label">Mỗi buổi</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">25+</div>
+                <div class="stat-label">Bài tập</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Mini Contest</div>
+            </div>
+        </div>
+
+        <div class="lessons">
+            <a href="lesson-01.html" class="lesson-card">
+                <div class="lesson-num l1">01</div>
+                <div class="lesson-info">
+                    <div class="lesson-title">Chào mừng đến thế giới Lập trình Thi đấu</div>
+                    <div class="lesson-desc">Cài đặt môi trường, print(), input(), biến, kiểu dữ liệu, giải bài đầu tiên trên VNOJ</div>
+                    <div class="lesson-meta">
+                        <span class="lesson-badge">🟢 Beginner</span>
+                        <span class="lesson-badge">5 bài tập</span>
+                    </div>
+                </div>
+                <div class="lesson-arrow">→</div>
+            </a>
+
+            <a href="lesson-02.html" class="lesson-card">
+                <div class="lesson-num l2">02</div>
+                <div class="lesson-info">
+                    <div class="lesson-title">Rẽ nhánh — Dạy máy tính ra quyết định</div>
+                    <div class="lesson-desc">if/elif/else, toán tử so sánh & logic, xử lý edge cases, bài toán phân loại</div>
+                    <div class="lesson-meta">
+                        <span class="lesson-badge">🟢 Beginner</span>
+                        <span class="lesson-badge">5 bài tập</span>
+                    </div>
+                </div>
+                <div class="lesson-arrow">→</div>
+            </a>
+
+            <a href="lesson-03.html" class="lesson-card">
+                <div class="lesson-num l3">03</div>
+                <div class="lesson-info">
+                    <div class="lesson-title">Vòng lặp — Sức mạnh thực sự của Lập trình</div>
+                    <div class="lesson-desc">for, while, range(), break/continue, brute force, số nguyên tố</div>
+                    <div class="lesson-meta">
+                        <span class="lesson-badge">🟡 Intermediate</span>
+                        <span class="lesson-badge">6 bài tập</span>
+                    </div>
+                </div>
+                <div class="lesson-arrow">→</div>
+            </a>
+
+            <a href="lesson-04.html" class="lesson-card">
+                <div class="lesson-num l4">04</div>
+                <div class="lesson-info">
+                    <div class="lesson-title">List (Mảng) — Xử lý dữ liệu hàng loạt</div>
+                    <div class="lesson-desc">List, index, duyệt mảng, input format CP, tìm min/max, đảo mảng</div>
+                    <div class="lesson-meta">
+                        <span class="lesson-badge">🟡 Intermediate</span>
+                        <span class="lesson-badge">6 bài tập</span>
+                    </div>
+                </div>
+                <div class="lesson-arrow">→</div>
+            </a>
+
+            <a href="lesson-05.html" class="lesson-card">
+                <div class="lesson-num l5">05</div>
+                <div class="lesson-info">
+                    <div class="lesson-title">String & Tổng hợp — Mini Competition 🏆</div>
+                    <div class="lesson-desc">Xử lý chuỗi, palindrome, Caesar cipher, thi đấu thực tế trên online judge</div>
+                    <div class="lesson-meta">
+                        <span class="lesson-badge">🟠 Challenge</span>
+                        <span class="lesson-badge">5 bài contest</span>
+                        <span class="lesson-badge">🏆 Competition</span>
+                    </div>
+                </div>
+                <div class="lesson-arrow">→</div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>Slides được tạo bằng <span class="tech">reveal.js</span> — Nhấn vào từng buổi để bắt đầu</p>
+            <p style="margin-top:8px;">Sử dụng phím <span class="tech">← →</span> hoặc <span class="tech">Space</span> để chuyển slide</p>
+        </div>
+    </div>
+</body>
+</html>

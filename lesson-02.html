@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buổi 2 — Rẽ nhánh: Dạy máy tính ra quyết định</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- Title -->
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a1628 100%)">
+  <div class="lesson-number">Buổi 02</div>
+  <h1>Rẽ Nhánh<br>Dạy máy tính ra quyết định</h1>
+  <p class="subtitle">if / elif / else — Toán tử so sánh & logic 🧠</p>
+</section>
+
+<!-- Ôn bài -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🔄 Ôn bài buổi 1 — Quiz nhanh!</h2>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Câu 1: <code>print(10 // 3)</code> in ra gì?</div>
+    <div class="exercise-desc fragment" style="color:var(--success);">→ Đáp án: <strong>3</strong> (chia lấy phần nguyên)</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Câu 2: <code>input()</code> trả về kiểu dữ liệu gì?</div>
+    <div class="exercise-desc fragment" style="color:var(--success);">→ Đáp án: <strong>str</strong> (luôn luôn là chuỗi!)</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Câu 3: <code>17 % 5</code> bằng bao nhiêu?</div>
+    <div class="exercise-desc fragment" style="color:var(--success);">→ Đáp án: <strong>2</strong> (17 chia 5 dư 2)</div>
+  </div>
+</section>
+
+<!-- Toán tử so sánh -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>⚖️ Toán tử so sánh</h2>
+  <p>So sánh 2 giá trị → trả về <code>True</code> hoặc <code>False</code></p>
+  <table>
+    <thead><tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ</th><th>Kết quả</th></tr></thead>
+    <tbody>
+      <tr><td><code>==</code></td><td>Bằng</td><td><code>5 == 5</code></td><td><code style="color:var(--success)">True</code></td></tr>
+      <tr><td><code>!=</code></td><td>Khác</td><td><code>5 != 3</code></td><td><code style="color:var(--success)">True</code></td></tr>
+      <tr><td><code>&lt;</code></td><td>Nhỏ hơn</td><td><code>3 &lt; 7</code></td><td><code style="color:var(--success)">True</code></td></tr>
+      <tr><td><code>&gt;</code></td><td>Lớn hơn</td><td><code>3 &gt; 7</code></td><td><code style="color:var(--secondary)">False</code></td></tr>
+      <tr><td><code>&lt;=</code></td><td>Nhỏ hơn hoặc bằng</td><td><code>5 &lt;= 5</code></td><td><code style="color:var(--success)">True</code></td></tr>
+      <tr><td><code>&gt;=</code></td><td>Lớn hơn hoặc bằng</td><td><code>3 &gt;= 7</code></td><td><code style="color:var(--secondary)">False</code></td></tr>
+    </tbody>
+  </table>
+  <div class="info-box warning fragment">⚠️ <code>=</code> là gán giá trị, <code>==</code> là so sánh. Đừng nhầm!</div>
+</section>
+
+<!-- if cơ bản -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🔀 Câu lệnh <code>if</code></h2>
+  <p>Nếu điều kiện <span class="highlight">đúng</span> → thực hiện khối lệnh bên trong</p>
+  <pre><code class="language-python">tuoi = int(input("Nhập tuổi: "))
+
+if tuoi >= 18:
+    print("Bạn đã đủ tuổi trưởng thành! 🎉")
+    print("Bạn có thể đi bầu cử")</code></pre>
+  <div class="info-box fragment">
+    📌 <strong>Lưu ý:</strong> Sau <code>if</code> phải có dấu <code>:</code> và khối lệnh bên trong phải <span class="highlight">thụt vào 4 dấu cách</span> (indent)
+  </div>
+</section>
+
+<!-- if-else -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🔀 <code>if</code> ... <code>else</code></h2>
+  <p>Nếu đúng → làm A, Nếu sai → làm B</p>
+  <div style="text-align:center; margin:15px 0;">
+    <span class="flow-box decision">Điều kiện?</span><br>
+    <span class="flow-arrow">↙️</span>
+    <span style="margin:0 40px;"></span>
+    <span class="flow-arrow">↘️</span><br>
+    <span class="flow-box output">True → Khối if</span>
+    <span style="margin:0 20px;"></span>
+    <span class="flow-box" style="display:inline-block;padding:10px 20px;border-radius:8px;font-weight:600;font-size:0.75em;background:rgba(255,107,107,0.15);border:1px solid var(--secondary);color:var(--secondary);">False → Khối else</span>
+  </div>
+  <pre><code class="language-python">so = int(input())
+
+if so % 2 == 0:
+    print("Số chẵn")
+else:
+    print("Số lẻ")</code></pre>
+</section>
+
+<!-- if-elif-else -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🔀 <code>if</code> ... <code>elif</code> ... <code>else</code></h2>
+  <p>Khi có <span class="highlight">nhiều hơn 2 trường hợp</span></p>
+  <pre><code class="language-python">diem = float(input("Nhập điểm: "))
+
+if diem >= 9:
+    print("Xuất sắc 🌟")
+elif diem >= 8:
+    print("Giỏi 👏")
+elif diem >= 6.5:
+    print("Khá 👍")
+elif diem >= 5:
+    print("Trung bình 😐")
+else:
+    print("Yếu — Cần cố gắng hơn! 💪")</code></pre>
+  <div class="info-box fragment">
+    📌 Python kiểm tra <span class="highlight">từ trên xuống</span>, gặp điều kiện đúng đầu tiên thì dừng
+  </div>
+</section>
+
+<!-- Toán tử logic -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🧠 Toán tử logic: <code>and</code>, <code>or</code>, <code>not</code></h2>
+  <table>
+    <thead><tr><th>Toán tử</th><th>Ý nghĩa</th><th>Ví dụ</th><th>Kết quả</th></tr></thead>
+    <tbody>
+      <tr><td><code>and</code></td><td>Cả hai phải đúng</td><td><code>True and False</code></td><td><code style="color:var(--secondary)">False</code></td></tr>
+      <tr><td><code>or</code></td><td>Chỉ cần một đúng</td><td><code>True or False</code></td><td><code style="color:var(--success)">True</code></td></tr>
+      <tr><td><code>not</code></td><td>Đảo ngược</td><td><code>not True</code></td><td><code style="color:var(--secondary)">False</code></td></tr>
+    </tbody>
+  </table>
+  <pre class="fragment"><code class="language-python"># Kiểm tra số trong khoảng [1, 100]
+n = int(input())
+if n >= 1 and n <= 100:
+    print("Hợp lệ")
+
+# Cách viết ngắn hơn trong Python:
+if 1 <= n <= 100:
+    print("Hợp lệ")</code></pre>
+</section>
+
+<!-- Ví dụ CP: Năm nhuận -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>🏆 Bài CP: Kiểm tra năm nhuận</h2>
+  <div class="info-box">
+    📋 <strong>Đề bài:</strong> Nhập năm Y, kiểm tra có phải năm nhuận không.<br>
+    Năm nhuận: chia hết cho 4 VÀ (không chia hết cho 100 HOẶC chia hết cho 400)
+  </div>
+  <pre class="fragment"><code class="language-python">y = int(input())
+
+if y % 4 == 0 and (y % 100 != 0 or y % 400 == 0):
+    print("YES")
+else:
+    print("NO")</code></pre>
+  <div class="fragment">
+    <h3>Test thử:</h3>
+    <table>
+      <thead><tr><th>Input</th><th>Output</th><th>Giải thích</th></tr></thead>
+      <tbody>
+        <tr><td>2024</td><td>YES</td><td>2024 % 4 == 0, 2024 % 100 != 0</td></tr>
+        <tr><td>1900</td><td>NO</td><td>1900 % 100 == 0, 1900 % 400 != 0</td></tr>
+        <tr><td>2000</td><td>YES</td><td>2000 % 400 == 0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Mẹo CP: Edge cases -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>💡 Mẹo CP: Edge Cases</h2>
+  <div class="concept">
+    <div class="emoji">🔍</div>
+    <div class="concept-title">Edge Case = Trường hợp biên / đặc biệt</div>
+    <div class="concept-desc">Những giá trị "kỳ lạ" mà code dễ sai nếu không xét</div>
+  </div>
+  <div class="key-point fragment"><span class="icon">⚠️</span><span>Số <span class="highlight">0</span> — Chẵn hay lẻ? Dương hay âm?</span></div>
+  <div class="key-point fragment"><span class="icon">⚠️</span><span>Số <span class="highlight">âm</span> — Code có xử lý đúng không?</span></div>
+  <div class="key-point fragment"><span class="icon">⚠️</span><span>Giá trị <span class="highlight">rất lớn</span> — 10⁹, 10¹⁸?</span></div>
+  <div class="key-point fragment"><span class="icon">⚠️</span><span>Giá trị <span class="highlight">bằng nhau</span> — a == b thì sao?</span></div>
+  <div class="info-box success fragment">
+    ✅ <strong>Quy tắc vàng:</strong> Luôn thử với giá trị nhỏ nhất, lớn nhất, bằng 0, bằng nhau, và âm!
+  </div>
+</section>
+
+<!-- Bài tập -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e)">
+  <h2>💪 Bài tập thực hành</h2>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 1: Chẵn lẻ <span class="difficulty">⭐</span></div>
+    <div class="exercise-desc">Nhập số nguyên N, in "Chan" hoặc "Le"</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 2: Max 3 số <span class="difficulty">⭐⭐</span></div>
+    <div class="exercise-desc">Nhập 3 số a, b, c — In ra số lớn nhất (KHÔNG dùng hàm max)</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 3: Phân loại tam giác <span class="difficulty">⭐⭐</span></div>
+    <div class="exercise-desc">Nhập 3 cạnh → In: "Khong hop le", "Deu", "Can", "Thuong"</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 4: Năm nhuận <span class="difficulty">⭐⭐</span> <span class="badge badge-cp">CP</span></div>
+    <div class="exercise-desc">Nhập năm Y, in "YES" hoặc "NO"</div>
+  </div>
+  <div class="exercise-card fragment">
+    <div class="exercise-title">Bài 5: Xếp loại <span class="difficulty">⭐⭐⭐</span> <span class="badge badge-cp">CP</span></div>
+    <div class="exercise-desc">Nhập điểm 3 môn Toán, Văn, Anh → Xếp loại Giỏi/Khá/TB/Yếu theo quy tắc</div>
+  </div>
+</section>
+
+<!-- BTVN + Preview -->
+<section data-background-gradient="linear-gradient(135deg, #0a0a1a, #0d1b2a)">
+  <h2>🏠 Bài tập về nhà</h2>
+  <div class="key-point"><span class="icon">📌</span><span>Hoàn thành 5 bài tập ở trên</span></div>
+  <div class="key-point"><span class="icon">📌</span><span>Giải thêm 3 bài "if-else" trên VNOJ</span></div>
+  <div class="key-point"><span class="icon">📌</span><span>Thử tự nghĩ thêm edge cases cho mỗi bài</span></div>
+  <div class="concept fragment" style="margin-top:30px;">
+    <div class="emoji">🔁</div>
+    <div class="concept-title">Preview Buổi 3</div>
+    <div class="concept-desc">Vòng lặp — for, while<br>Sức mạnh thực sự của lập trình: làm 1 triệu phép tính trong 1 giây!</div>
+  </div>
+</section>
+
+<!-- XP -->
+<section class="title-slide" data-background-gradient="linear-gradient(135deg, #0a0a1a, #1a0a2e, #0a1628)">
+  <h1>🎮 XP Earned!</h1>
+  <p style="font-size:0.9em; color:var(--text-dim); margin-bottom:20px;">Buổi 2 hoàn thành — Mở khóa: Rẽ nhánh!</p>
+  <div style="max-width:400px; margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; font-size:0.6em; margin-bottom:4px;">
+      <span>Level 1</span><span class="highlight">200 XP</span>
+    </div>
+    <div class="xp-bar"><div class="xp-fill" style="width:40%"></div></div>
+    <p style="font-size:0.6em; color:var(--text-dim); margin-top:8px;">200 / 500 XP → Level 2</p>
+  </div>
+</section>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script>Reveal.initialize({ hash:true, slideNumber:'c/t', transition:'slide', backgroundTransition:'fade', plugins:[RevealHighlight] });</script>
+</body>
+</html>

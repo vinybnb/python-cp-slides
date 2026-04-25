@@ -63,15 +63,14 @@ def maze_bfs(grid, sr, sc, er, ec):
     dist = [[-1]*C for _ in range(R)]
     dist[sr][sc] = 0
     q = deque([(sr, sc)])
-    for dx, dy in [(0,1),(0,-1),(1,0),(-1,0)]:
-        while q:
-            x, y = q.popleft()
-            for dx, dy in [(0,1),(0,-1),(1,0),(-1,0)]:
-                nx, ny = x+dx, y+dy
-                if 0<=nx<R and 0<=ny<C \
-                   and grid[nx][ny]!='#' and dist[nx][ny]==-1:
-                    dist[nx][ny] = dist[x][y] + 1
-                    q.append((nx, ny))
+    while q:
+        x, y = q.popleft()
+        for dx, dy in [(0,1),(0,-1),(1,0),(-1,0)]:
+            nx, ny = x+dx, y+dy
+            if 0&lt;=nx&lt;R and 0&lt;=ny&lt;C \
+               and grid[nx][ny]!='#' and dist[nx][ny]==-1:
+                dist[nx][ny] = dist[x][y] + 1
+                q.append((nx, ny))
     return dist[er][ec]</code></pre>
 </section>
 
